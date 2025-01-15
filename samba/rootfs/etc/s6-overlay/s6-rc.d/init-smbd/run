@@ -1,4 +1,6 @@
 #!/command/with-contenv bashio
+# vim: ft=bash
+# shellcheck shell=bash
 # ==============================================================================
 # Prepare the Samba service for running
 # ==============================================================================
@@ -40,6 +42,6 @@ username=$(bashio::config 'username')
 password=$(bashio::config 'password')
 addgroup "${username}"
 adduser -D -H -G "${username}" -s /bin/false "${username}"
-# shellcheck disable=SC1117
-echo -e "${password}\n${password}" \
+
+(echo "$password"; echo "$password") \
     | smbpasswd -a -s -c "/etc/samba/smb.conf" "${username}"

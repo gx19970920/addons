@@ -43,6 +43,8 @@ s0_legacy_key: 2232666D100F795E5BB17F0A1BB7A146
 s2_access_control_key: A97D2A51A6D4022998BEFC7B5DAE8EA1
 s2_authenticated_key: 309D4AAEF63EFD85967D76ECA014D1DF
 s2_unauthenticated_key: CF338FE0CB99549F7C0EA96308E5A403
+lr_s2_access_control_key: E2CEA6B5986C818EEC0D0065D81E2BD5
+lr_s2_authenticated_key: 863027C59CFC522A9A3C41976AE54254
 ```
 
 ### Option `device`
@@ -64,9 +66,9 @@ In most cases this looks like one of the following:
 
 ### Security Keys
 
-There are four different security keys required to take full advantage of the
+There are six different security keys required to take full advantage of the
 different inclusion methods that Z-Wave JS supports: `s0_legacy_key`,
-`s2_access_control_key`, `s2_authenticated_key`, and `s2_unauthenticated_key`.
+`s2_access_control_key`, `s2_authenticated_key`, `s2_unauthenticated_key`, `lr_s2_access_control_key`, and `lr_s2_authenticated_key`.
 
 If you are coming from a previous version of `zwave-js`, you likely have a key
 stored in the `network_key` configuration option. When the addon is first
@@ -123,6 +125,18 @@ without verification that the correct device was included. This configuration
 option is required, but if it is unset the addon will generate a new one
 automatically on startup.
 
+#### Option `lr_s2_access_control_key`
+
+The `lr_s2_access_control_key` must be provided in order to include devices using
+Z-Wave Long Range. This configuration option is required, but if it is unset
+the addon will generate a new one automatically on startup.
+
+#### Option `lr_s2_authenticated_key`
+
+The `lr_s2_authenticated_key` must be provided in order to include devices using
+Z-Wave Long Range. This configuration option is required, but if it is unset
+the addon will generate a new one automatically on startup.
+
 ### Option `log_level` (optional)
 
 This option sets the log level of Z-Wave JS. Valid options are:
@@ -161,7 +175,7 @@ This setting tells the add-on how to handle soft-resets for 500 series controlle
 If you don't have a USB stick, you can use a fake stick for testing purposes.
 It will not be able to control any real devices.
 
-### Optional `disable_controller_recovery` (optional):
+### Option `disable_controller_recovery` (optional):
 
 This setting will disable Z-Wave JS's automatic recovery process when the
 controller appears to be unresponsive and will instead let the controller
@@ -171,6 +185,13 @@ marked as dead. If a controller is not able to recover on its own, you
 will need to restart the add-on to attempt recovery. In most cases, users
 will never need to use this feature, so only change this setting if you
 know what you are doing and/or you are asked to.
+
+### Option `disable_watchdog` (optional):
+
+This setting will prevent Z-Wave JS from enabling the hardware watchdog
+on supporting controllers. In most cases, users will never need to use this
+feature, so only change this setting if you know what you are doing and/or
+you are asked to.
 
 ### Option `safe_mode` (optional)
 

@@ -1,11 +1,12 @@
 #!/usr/bin/with-contenv bashio
+# shellcheck shell=bash
 # ==============================================================================
 # Setup persistent user settings
 # ==============================================================================
 readonly DIRECTORIES=(addon_configs addons backup homeassistant media share ssl)
 
 # Persist shell history by redirecting .bash_history to /data
-if ! bashio::fs.file_exists /data/.bash_profile; then
+if ! bashio::fs.file_exists /data/.bash_history; then
     touch /data/.bash_history
 fi
 chmod 600 /data/.bash_history

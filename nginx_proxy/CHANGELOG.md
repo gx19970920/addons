@@ -1,5 +1,33 @@
 # Changelog
 
+## 3.11.1
+
+- Update to new nginx http2 directive. This also suppress a deprecation warning.
+
+## 3.11.0
+
+- Update Alpine Linux to 3.20 (nginx 1.26.x)
+
+## 3.10.1
+
+- Make `real_ip_from` optional through an empty default value
+
+## 3.10.0
+
+- Supporting TCP Proxy Protocol
+
+## 3.9.0
+
+- Add `map_hash_bucket_size` to add support for longer matches in `map`
+
+## 3.8.0
+
+- Update Alpine Linux to 3.19
+
+## 3.7.0
+
+- Modify `server_names_hash_bucket_size` to add support for longer domain names
+
 ## 3.6.0
 
 - Add port to Host header to fix origin issues affecting ESPHome and other addons

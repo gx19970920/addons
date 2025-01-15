@@ -5,6 +5,8 @@
 
    security = user
    ntlm auth = yes
+   idmap config * : backend = tdb
+   idmap config * : range = 1000000-2000000
 
    load printers = no
    disable spoolss = yes
@@ -23,6 +25,8 @@
    mangled names = no
    dos charset = CP850
    unix charset = UTF-8
+
+   vfs objects = catia fruit streams_xattr
 
 [config]
    browseable = yes

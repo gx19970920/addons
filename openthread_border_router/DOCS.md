@@ -13,8 +13,8 @@ Follow these steps to get the add-on installed on your system:
 ## How to use
 
 You will need a 802.15.4 capable radio supported by OpenThread. Home Assistant
-Yellow as well as Home Assistant SkyConnect are both capable to run OpenThread.
-This add-on automatically installs the necessary firmware on these systems.
+Yellow as well as Home Assistant SkyConnect/Connect ZBT-1 are both capable to run
+OpenThread. This add-on automatically installs the necessary firmware on these systems.
 
 If you are using Home Assistant Yellow, choose `/dev/ttyAMA1` as device.
 
@@ -65,6 +65,24 @@ Add-on configuration:
 | otbr_log_level     | Set the log level of the OpenThread BorderRouter Agent     |
 | firewall           | Enable OpenThread Border Router firewall to block unnecessary traffic |
 | nat64              | Enable NAT64 to allow Thread devices accessing IPv4 addresses |
+| network_device     | IP address and port to connect to a network-based RCP (see below) |
+
+> [!WARNING]
+> The OTBR expects the RCP connected radio to be on a reliable link such as
+> UART or SPI. Using TCP/IP to reach a remote RCP radio breaks this assumption.
+> If the TCP/IP connection fails, the OTBR will not shutdown cleanly and leave
+> stale routes in your network. This will lead to Thread devices to be
+> potentially unreachable for up to 30 minutes (route lifetime) even when other
+> routers are available.
+>
+> The RCP protocol is not designed to be transferred over an IP network: It is
+> a timing-sensitive protocol. You might experience Thread issues if your
+> network link has excessive latencies. As Thread is networking capable,
+> running a Thread border router on the system the RCP radio is plugged in is
+> recommended.
+
+> [!NOTE]
+> When using a network device, you still need to set a dummy serial port device, e.g. `/dev/ttyS3`.
 
 ## Support
 
@@ -84,5 +102,4 @@ In case you've found a bug, please [open an issue on our GitHub][issue].
 [issue]: https://github.com/home-assistant/addons/issues
 [openthread-platforms]: https://openthread.io/platforms
 [nordic-nrf52840-dongle]: https://www.nordicsemi.com/Products/Development-hardware/nrf52840-dongle
-[nordic-nrf52840-dongle-install]: https://developer.nordicsemi.com/nRF_Connect_SDK/doc/latest/matter/openthread_rcp_nrf_dongle.html
-
+[nordic-nrf52840-dongle-install]: https://docs.nordicsemi.com/bundle/ncs-latest/page/nrf/protocols/thread/tools.html#configuring_a_radio_co-processor

@@ -1,4 +1,19 @@
 # Changelog
+## 12.3.3
+
+- Enable Samba configurations to improve interoperability with Apple devices
+
+## 12.3.2
+
+- Suppress benign idmap logged error
+
+## 12.3.1
+
+- Handle passwords with backslash correctly
+
+## 12.3.0
+
+- Upgrade Alpine Linux to 3.19
 
 ## 12.2.0
 
