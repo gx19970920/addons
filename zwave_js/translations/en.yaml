@@ -48,6 +48,16 @@ configuration:
     description: >-
       This must be provided in order to include devices with the S2
       Unauthenticated security class.
+  lr_s2_access_control_key:
+    name: Z-Wave Long Range S2 Access Control Key
+    description: >-
+      This must be provided in order to include devices using Z-Wave
+      Long Range with the S2 Access Control security class.
+  lr_s2_authenticated_key:
+    name: Z-Wave Long Range S2 Authenticated Key
+    description: >-
+      This must be provided in order to include devices using Z-Wave
+      Long Range with the S2 Authenticated security class.
   soft_reset:
     name: 500 series controller soft-reset
     description: >-
@@ -67,6 +77,13 @@ configuration:
       will need to restart the add-on to attempt recovery. In most cases, users
       will never need to use this feature, so only change this setting if you
       know what you are doing and/or you are asked to.
+  disable_watchdog:
+    name: Disable Z-Wave JS (hardware) watchdog
+    description: >-
+      This setting will prevent Z-Wave JS from enabling the hardware watchdog
+      on supporting controllers. In most cases, users will never need to use
+      this feature, so only change this setting if you know what you are doing
+      and/or you are asked to.
   safe_mode:
     name: Enable safe mode
     description: >-

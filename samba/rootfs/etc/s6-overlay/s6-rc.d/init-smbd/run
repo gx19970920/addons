@@ -1,4 +1,6 @@
 #!/command/with-contenv bashio
+# vim: ft=bash
+# shellcheck shell=bash
 # ==============================================================================
 # Prepare the Samba service for running
 # ==============================================================================
@@ -11,6 +13,8 @@ export HOSTNAME
 if ! bashio::config.has_value 'username' || ! bashio::config.has_value 'password'; then
     bashio::exit.nok "Setting a username and password is required!"
 fi
+
+bashio::config.require "enabled_shares" "Samba is a tool for sharing folders. Starting it without sharing any folders defeats the purpose."
 
 # Read hostname from API or setting default "hassio"
 HOSTNAME=$(bashio::info.hostname)
@@ -30,7 +34,8 @@ fi
 bashio::log.info "Interfaces: $(printf '%s ' "${interfaces[@]}")"
 
 # Generate Samba configuration.
-jq ".interfaces = $(jq -c -n '$ARGS.positional' --args -- "${interfaces[@]}")" /data/options.json \
+jq ".interfaces = $(jq -c -n '$ARGS.positional' --args -- "${interfaces[@]}") |
+    .enabled_shares.[] |= ascii_downcase" /data/options.json \
     | tempio \
       -template /usr/share/tempio/smb.gtpl \
       -out /etc/samba/smb.conf
@@ -40,6 +45,6 @@ username=$(bashio::config 'username')
 password=$(bashio::config 'password')
 addgroup "${username}"
 adduser -D -H -G "${username}" -s /bin/false "${username}"
-# shellcheck disable=SC1117
-echo -e "${password}\n${password}" \
+
+(echo "$password"; echo "$password") \
     | smbpasswd -a -s -c "/etc/samba/smb.conf" "${username}"

@@ -1,5 +1,22 @@
 # Changelog
 
+## 8.0.1
+- Fix bashio warn(ing) logger usage breaking deployment keys
+
+## 8.0.0
+- Refactor git_pull to use HA Api with bashio
+- Update base image to Alpine 3.21
+- Remove ha cli dependency
+
+
+## 7.14.1
+- Fix error where $HOME is not defined
+
+## 7.14.0
+
+- Update base image to Alpine 3.19
+- Update Home Assistant CLI to 4.31.0
+
 ## 7.13.1
 
 - Update Home Assistant CLI to 4.12.2

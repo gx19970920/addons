@@ -1,5 +1,16 @@
 # Changelog
 
+## 6.5.0
+
+- Update base image to Debian 12 (bookworm)
+- Update mosquitto to version 2.0.20
+- Update mosquitto-go-auth to version 2.1.0
+- Update libwebsockets to version 4.3.3
+
+## 6.4.1
+
+- Increase default max_queued_messages to 8192 to fix dropped messages during Home Assistant startup
+
 ## 6.4.0
 
 - Update mosquitto to 2.0.18
